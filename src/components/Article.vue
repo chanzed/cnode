@@ -15,33 +15,35 @@
         <div v-html="post.content" class="topic_content"></div>
       </div>
     </div>
-    <div id="reply">
-      <div class="topbar" v-if="post.replies">{{post.replies.length}}回复</div>
-      <div v-for="(reply, index) in post.replies" :key="index" class="replySec">
-        <div class="replyUp">
-          <router-link
-            :to="{
+    <div id="content">
+      <div id="reply">
+        <div class="topbar" v-if="post.replies">{{post.replies.length}}回复</div>
+        <div v-for="(reply, index) in post.replies" :key="index" class="replySec">
+          <div class="replyUp">
+            <router-link
+              :to="{
             name: 'user_info',
             params: {
               name: reply.author.loginname,
             }
           }"
-          >   
-            <img :src="reply.author.avatar_url" alt />
-          </router-link>  
-          <router-link
-            :to="{
+            >
+              <img :src="reply.author.avatar_url" alt />
+            </router-link>
+              <router-link
+                :to="{
             name: 'user_info',
             params: {
               name: reply.author.loginname,
             }
           }"
-          >
-            <span>{{reply.author.loginname}}</span>
-          </router-link>
-          <span>{{index+1}}楼</span>
+              >
+                <span>{{reply.author.loginname}}</span>
+              </router-link>
+              <span>{{index+1}}楼</span>
+          </div>
+          <p v-html="reply.content"></p>
         </div>
-        <p v-html="reply.content"></p>
       </div>
     </div>
   </div>
@@ -62,7 +64,7 @@ export default {
           if (res.data.success === true) {
             this.isLoading = false;
             this.post = res.data.data;
-            console.log(this.post.replies)
+            console.log(this.post.replies);
           }
         })
         .catch(error => {
@@ -75,7 +77,7 @@ export default {
     this.getArticleData();
   },
   watch: {
-    '$route': 'getArticleData',
+    $route: "getArticleData"
   }
 };
 </script>
