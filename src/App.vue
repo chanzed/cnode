@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <Header></Header>
-    <PostList></PostList>
+    <div class="main">
+      <router-view name="slidebar"></router-view>
+      <router-view name="main"></router-view>
+    </div>
   </div>
 </template>
 
@@ -17,5 +20,13 @@ export default {
 };
 </script>
 
-<style>
+<style  scoped>
+.main {
+  width: 80%;
+  margin: 0 auto;
+}
+#app {
+  background-color: #e1e1e1;
+  min-height: 100vh;
+}
 </style>
